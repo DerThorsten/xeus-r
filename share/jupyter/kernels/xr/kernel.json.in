@@ -1,0 +1,11 @@
+{
+  "display_name": "R 3.6 (xr)",
+  "argv": [
+      "@XEUS_R_KERNELSPEC_PATH@xr",
+      "-f",
+      "{connection_file}"
+  ],
+  "language": "R",
+  "metadata": {"debugger": false
+  }
+}
