@@ -21,38 +21,17 @@ namespace nl = nlohmann;
 
 namespace xr
 {
+
+
     interpreter::interpreter() : m_R()
     {
         xeus::register_interpreter(this);
     }
 
-    nl::json interpreter::execute_request_impl(int execution_counter, // Typically the cell number
-                                               const std::string& code, // Code to execute
-                                               bool /*silent*/,
-                                               bool /*store_history*/,
-                                               nl::json /*user_expressions*/,
-                                               bool /*allow_stdin*/)
-    {
-        nl::json kernel_res;
-
-	SEXP ret;
-        m_R.parseEval(code, ret);
-
-        nl::json pub_data;
-        pub_data["text/plain"] = code;
-        publish_execution_result(execution_counter, std::move(pub_data), nl::json());
-
-        kernel_res["status"] = "ok";
-        kernel_res["payload"] = nl::json::array();
-        kernel_res["user_expressions"] = nl::json::object();
-
-        return kernel_res;
-
-    }
-
+   
     void interpreter::configure_impl()
     {
-        // Perform some operations
+        register_io();
     }
 
     nl::json interpreter::is_complete_request_impl(const std::string& code)
@@ -100,7 +79,7 @@ namespace xr
         return result;
     }
 
-    nl::json interpreter::inspect_request_impl(const std::string& code,
+    nl::json interpreter::inspect_request_impl(const std::string& /*code*/,
                                                       int /*cursor_pos*/,
                                                       int /*detail_level*/)
     {

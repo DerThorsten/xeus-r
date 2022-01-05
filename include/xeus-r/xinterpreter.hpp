@@ -60,7 +60,7 @@ namespace xr
         void shutdown_request_impl() override;
 
     private:
-
+        void register_io();
 	RInside m_R;
     };
 }

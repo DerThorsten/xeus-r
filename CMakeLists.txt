@@ -191,6 +191,8 @@ set(XEUS_R_HEADERS
 
 set(XEUS_R_SRC
     src/xinterpreter.cpp 
+    src/xio.cpp
+    src/xexecute_request.cpp 
 )
 
 set(XEUS_R_MAIN_SRC
